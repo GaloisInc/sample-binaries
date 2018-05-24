@@ -1,0 +1,6 @@
+*~
+*.hi
+.cmd_history
+dist*
+result*
+_darcs/

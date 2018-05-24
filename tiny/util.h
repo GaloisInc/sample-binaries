@@ -15,3 +15,10 @@
       "movq $0,%rdi\n"               \
       "syscall")
 #endif
+
+#ifdef __x86_64
+#define EXIT() \
+  asm("movq $60,%rax\n"              \
+      "movq $0,%rdi\n"               \
+      "syscall")
+#endif

@@ -1,0 +1,17 @@
+* Sample Binaries
+
+This repository provides a common set of simple sample binaries that
+can be used for testing binary analysis functionality.  These binaries
+don't tend to do anything particularly useful, but they do have
+useful/interesting implementations.
+
+Binaries are available for the following architectures:
+
+  * ARM AArch32, ARM
+  * ARM AArch32, Thumb
+  * PPC 32
+  * PPC 64
+  * RISC-V
+  * X86_64
+
+

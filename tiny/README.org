@@ -1,0 +1,3 @@
+This directory is a collection of tiny binaries that don't
+individually do a whole lot, but have specific functionality that is
+intended to be analyzed or verified.

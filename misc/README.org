@@ -1,0 +1,2 @@
+A collection of miscellaneous binaries, sometimes with no
+corresponding sources and not always available for all architectures.

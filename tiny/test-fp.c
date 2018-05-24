@@ -1,13 +1,16 @@
 #include "util.h"
 #include <stdio.h>
 
+
 void _start() {
-  float res [] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+  // gcc will init via memset(): float res [] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+  float res[8];
   float a=45.4; // r9
   float b=1.1;  // r10
   float c=0.0;
   float *pointer = &res[0]; // r10
-  double dres [] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+  // gcc will init via memset(): double dres [] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+  double dres[8];
   double da = 41.221;
   double db = 11.11111;
   double dc = 0.0;
@@ -15,6 +18,24 @@ void _start() {
   int idx1 = 4;
   int idx2 = 0;
   int idx3 = 8;
+
+  res[0] = 0.0;
+  res[1] = 0.0;
+  res[2] = 0.0;
+  res[3] = 0.0;
+  res[4] = 0.0;
+  res[5] = 0.0;
+  res[6] = 0.0;
+  res[7] = 0.0;
+
+  dres[0] = 0.0;
+  dres[1] = 0.0;
+  dres[2] = 0.0;
+  dres[3] = 0.0;
+  dres[4] = 0.0;
+  dres[5] = 0.0;
+  dres[6] = 0.0;
+  dres[7] = 0.0;
 
 #ifdef __powerpc__
   /* TEST: Load/store single precision D-form */

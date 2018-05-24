@@ -1,4 +1,4 @@
-# To build via nix: $ nix-shell -p pkgs.gcc-arm-embedded --run make -f Makefile.arm
+# To build via nix: $ nix-shell -p pkgs.gcc-arm-embedded --run 'make -f Makefile.arm'
 
 A32CC=arm-none-eabi-gcc
 T32CC=arm-none-eabi-gcc -march=armv7-m
@@ -15,10 +15,10 @@ $(t32exe): %.t32-exe: %-t32.s
 	$(T32CC) -fno-stack-protector -nostdlib $< -o $@
 
 %-a32.s: %.c
-	$(A32CC) -fno-stack-protector -S -c $< -o $@
+	$(A32CC) -fno-stack-protector -nostdlib -S -c $< -o $@
 
 %-t32.s: %.c
-	$(T32CC) -fno-stack-protector -S -c $< -o $@
+	$(T32CC) -fno-stack-protector -nostdlib -S -c $< -o $@
 
 .PRECIOUS: %.s
 

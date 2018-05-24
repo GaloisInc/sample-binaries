@@ -1,8 +1,14 @@
-# To build via nix: $ nix-shell -p pkgs.gcc --run make -f Makefile.x86_64
+# To build via nix: $ nix-shell -p pkgs.gcc --run 'make -f Makefile.x86_64'
 
 x86exe = $(patsubst %.c,%.x86_64-exe,$(wildcard *.c))
 
 all: $(x86exe)
+
+$(x86exe): %.x86_64-exe: %-x86_64.s
+	$(CC) -fno-stack-protector -nostdlib $< -o $@
+
+%-x86_64.s: %.c
+	$(CC) -fno-stack-protector -foptimize-sibling-calls -S -c $< -o $@
 
 # Special rule for the tail call test case: -O2 is needed to convince
 # gcc to emit a tail call, but avoid that much aggressive optimization
@@ -10,12 +16,6 @@ all: $(x86exe)
 test-tail-call.x86_64-exe: test-tail-call.c
 	$(CC) -fno-stack-protector -O2 -fno-inline -S -c $< -o test-tail-call-x86_64.s
 	$(CC) -fno-stack-protector -O2 -fno-inline -nostdlib $< -o $@
-
-$(x86exe): %.x86_64-exe: %-x86_64.s
-	$(CC) -fno-stack-protector -nostdlib $< -o $@
-
-%-x86_64.s: %.c
-	$(CC) -fno-stack-protector -foptimize-sibling-calls -S -c $< -o $@
 
 .PRECIOUS: %.s
 

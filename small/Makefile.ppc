@@ -1,0 +1,50 @@
+# To build via nix: $ nix-shell -p pkgs.gcc-arm-embedded --run make -f Makefile.arm
+
+CC=powerpc64-linux-gnu-gcc
+
+ppcexe = $(patsubst %.c,%.ppc-exe,$(wildcard *.c))
+
+all: $(ppcexe)
+
+$(ppcexe): %.ppc-exe: %-ppc.s
+	$(CC) -fno-stack-protector -nostdlib $< -o $@
+
+%-ppc.s: %.c
+	$(CC) -fno-stack-protector -S -c $< -o $@
+
+.PRECIOUS: %.s
+
+clean:
+	rm -f *-ppc.s *.ppc-exe
+
+
+#     gccCross =
+#       let
+#         pkgsCross = nixpkgsFun {
+#           # Ben Nanonote system
+#           crossSystem = lib.systems.examples.ben-nanonote;
+#         };
+#       in
+#         pkgsCross.buildPackages.gccCrossStageStatic;
+#   };
+#   localSystem ? builtins.intersectAttrs { system = null; platform = null; } args
+
+# , # These are needed only because nix's `--arg` command-line logic doesn't work
+#   # with unnamed parameters allowed by ...
+#   system ? localSystem.system
+# , platform ? localSystem.platform
+# , crossSystem ? null
+
+# lib.systems.examples.riscv
+# lib.systems.examples.riscv32
+# lib.systems.examples.riscv64
+
+# config="powerpc-unknown-linux-gnu"  ?
+
+
+#   stdenv = stdenvNoCC;
+#   inherit (stdenv) hostPlatform targetPlatform;
+
+
+
+# --argstr system x86_64-cygwin

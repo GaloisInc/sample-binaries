@@ -1,0 +1,4 @@
+This directory is a collection of smallish binaries that implement
+various simple functions that can be analyzed.  These typically do not
+introduce complex or unusual algorithms and therefore are usually
+comprised of fairly common instructions.

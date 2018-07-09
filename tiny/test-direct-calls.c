@@ -22,6 +22,6 @@ void _start() {
   long i2 = (long)&g2;
   long i3 = (long)&g3;
   g1 = f1(i1, i2, i3);
-  EXIT();
+  EXIT(0);
 }
 

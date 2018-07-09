@@ -38,9 +38,9 @@ _start:
 	call	callee1@PLT
 #APP
 # 28 "test-tail-call.c" 1
-	movq $60,%rax
-movq $0,%rdi
-syscall
+	 movq $0,%rdi
+ movq $60,%rax
+ syscall
 # 0 "" 2
 #NO_APP
 	addq	$8, %rsp

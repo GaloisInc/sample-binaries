@@ -15,9 +15,9 @@ _start:
 .L2:
 #APP
 # 10 "test-conditional.c" 1
-	movq $60,%rax
-movq $0,%rdi
-syscall
+	 movq $0,%rdi
+ movq $60,%rax
+ syscall
 # 0 "" 2
 #NO_APP
 	ret

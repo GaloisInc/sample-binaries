@@ -1,24 +1,24 @@
 #if defined(__arm__) || defined(__thumb__)
-#define EXIT()                                  \
-    asm("svc #0")
+/*TBD: rval value on exit */
+#define EXIT(rval)                              \
+    asm volatile ("svc #0")
 #endif
 
 #ifdef __powerpc__
-#define EXIT() \
-  asm("li 0,1\n"              \
+/*TBD: rval value on exit */
+#define EXIT(rval)                              \
+  asm volatile                                  \
+     ("li 0,1\n"                                \
       "sc")
 #endif
 
-#ifdef __i686__
-#define EXIT() \
-  asm("movq $60,%rax\n"              \
-      "movq $0,%rdi\n"               \
-      "syscall")
-#endif
-
-#ifdef __x86_64
-#define EXIT() \
-  asm("movq $60,%rax\n"              \
-      "movq $0,%rdi\n"               \
-      "syscall")
+#if defined(__x86_64) || defined(__i686__)
+#define EXIT(rval)                              \
+  asm volatile                                  \
+     (" movq %0,%%rdi\n"                        \
+      " movq $60,%%rax\n"                       \
+      " syscall"                                \
+      : /* no output */                         \
+      : "g" (rval)                              \
+      : /* no extra modifications */)
 #endif

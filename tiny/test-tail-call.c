@@ -25,5 +25,5 @@ void callee1(int x) {
 void _start() {
   callee1(g);
 
-  EXIT();
+  EXIT(0);
 }

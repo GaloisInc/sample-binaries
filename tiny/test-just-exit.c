@@ -1,5 +1,5 @@
 #include "util.h"
 
 void _start() {
-  EXIT();
+  EXIT(0);
 }

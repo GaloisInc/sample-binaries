@@ -87,5 +87,5 @@ void _start() {
    : "r"(dpointer), "r"(idx3), "r"(idx2));
 #endif
 
-  EXIT();
+  EXIT(0);
 }
